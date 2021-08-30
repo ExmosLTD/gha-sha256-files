@@ -1,0 +1,12 @@
+name: 'Generate Hashes for supplied files'
+author: 'Exmos'
+description: 'Generates sha256 hashes for all files that are supplied and saves them to hashes.txt.'
+outputs:
+  hashes:
+    description: 'A string with the resulting hashes, one per line, with file name followed by hash'
+runs:
+  using: 'node12'
+  main: 'index.js'
+branding:
+  icon: 'hash'
+  color: 'green'

@@ -1,0 +1,22 @@
+{
+  "name": "ghaction-generate-release-hashes",
+  "version": "1.0.0",
+  "description": "Hashes a list of files with sha256 and produces the files and hash as output.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ExmosLTD/gha-sha256-files.git"
+  },
+  "author": "Exmos",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ExmosLTD/gha-sha256-files"
+  },
+  "homepage": "https://github.com/ExmosLTD/gha-sha256-files#readme",
+  "dependencies": {
+    "@actions/core": "^1.5.0",
+    "@actions/github": "^4.0.0",
+    "hasha": "^5.2.2",
+    "node-fetch": "^2.6.1"
+  }
+}
