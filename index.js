@@ -2,14 +2,11 @@ const fs = require("fs");
 const path = require("path");
 const core = require('@actions/core');
 const hasha = require('hasha');
+const files = core.getInput("files");
 
 try {
-    var hashes = {};
-    const files = core.getInput("files");
+    var hashes = {};   
     files.split(" ").forEach(fileName => {
-        // for each file we want to sha256 it.
-        // read file
-        // sha it with hasha and sha256
         const filePath = path.join(process.env.GITHUB_WORKSPACE, fileName);
         if (!fs.existsSync(filePath)) {
             console.log(` - ${fileName} (Not Found)`);
