@@ -1,6 +1,7 @@
+const core = require('@actions/core');
+const core = require('@actions/github');
 const fs = require("fs");
 const path = require("path");
-const core = require('@actions/core');
 const hasha = require('hasha');
 const files = core.getInput("files");
 
