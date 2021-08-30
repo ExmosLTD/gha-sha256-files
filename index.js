@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const core = require('@actions/core');
-const fs = require('fs');
 const hasha = require('hasha');
 
 try {
