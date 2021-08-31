@@ -18,7 +18,7 @@ try {
     console.log("split files");
     var hashResult = getAllFilesInFolderRecursively(filesToHash).map(toHashString).join("\n");
     core.setOutput("hashes", hashResult);
-    writeFileSync("released-hashes.txt", hashResult, {encoding: "utf8"});
+    fs.writeFileSync("released-hashes.txt", hashResult, {encoding: "utf8"});
 } catch(error) {
     console.log("error: " + error);
     core.setFailed(error.message);    
