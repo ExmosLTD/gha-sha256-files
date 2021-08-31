@@ -19,5 +19,6 @@ try {
     setOutput("hashes", hashResult);
     writeFileSync("released-hashes.txt", hashResult, {encoding: "utf8"});
 } catch(error) {
+    console.log("error: " + error);
     core.setFailed(error.message);    
 }
