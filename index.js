@@ -17,7 +17,7 @@ try {
     const filesToHash = files.split(" ").map(f => path.join(process.env.GITHUB_WORKSPACE, f));
     console.log("split files");
     var hashResult = getAllFilesInFolderRecursively(filesToHash).map(toHashString).join("\n");
-    setOutput("hashes", hashResult);
+    core.setOutput("hashes", hashResult);
     writeFileSync("released-hashes.txt", hashResult, {encoding: "utf8"});
 } catch(error) {
     console.log("error: " + error);
