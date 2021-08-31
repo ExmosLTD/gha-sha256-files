@@ -1,8 +1,8 @@
-import { getInput, setOutput } from '@actions/core';
-import { existsSync, readFileSync, writeFileSync } from "fs";
-import { join } from "path";
-import hasha from 'hasha';
-const files = getInput("files");
+const core = require('@actions/core');
+const fs = require("fs");
+const path = require("path");
+const hasha = require('hasha');
+const files = core.getInput("files");
 
 const toHashString = (f) => `${path.basename(f).padEnd(30, ' ')} ${hasha(fs.readFileSync(f), {algorithm: "sha256"})}`;
 
