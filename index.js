@@ -4,22 +4,23 @@ const path = require("path");
 const hasha = require('hasha');
 const files = core.getInput("files");
 
+const toHashString = (f) => `${path.basename(f).padEnd(30, ' ')} ${hasha(fs.readFileSync(f), {algorithm: "sha256"})}`;
+
+// Recursively get all files in a folder.
+function getAllFilesInFolderRecursively(inputFiles) {
+     return inputFiles.flatMap(file => 
+         fs.statSync(file).isDirectory()
+            ? getAllFilesInFolderRecursively(fs.readdirSync(file).map(f => path.join(file, f)))
+            : fs.realpathSync(file));
+}
+
 try {
-    var hashes = {};   
-    files.split(" ").forEach(fileName => {
-        const filePath = path.join(process.env.GITHUB_WORKSPACE, fileName);
-        if (!fs.existsSync(filePath)) {
-            console.log(` - ${fileName} (Not Found)`);
-            return;
-        }
-        hashes[fileName] = hasha(fs.readFileSync(filePath), {algorithm: "sha256"});
-    })
-    var result = "";
-    for(const k in hashes) {
-        result += hashes[k] + " " + k + "\n";
-    }
-    core.setOutput("hashes", result);
-    fs.writeFileSync("released-hashes.txt", result, {encoding: "utf8"});
+    const filesToHash = files.split(" ").map(f => path.join(process.env.GITHUB_WORKSPACE, f));
+    console.log("split files");
+    var hashResult = getAllFilesInFolderRecursively(filesToHash).map(toHashString).join("\n");
+    core.setOutput("hashes", hashResult);
+    fs.writeFileSync("released-hashes.txt", hashResult, {encoding: "utf8"});
 } catch(error) {
-    core.setFailed(error.message);
+    console.log("error: " + error);
+    core.setFailed(error.message);    
 }
