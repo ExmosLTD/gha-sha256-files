@@ -21,5 +21,5 @@ try {
     core.setOutput("hashes", result);
     fs.writeFileSync("released-hashes.txt", result, {encoding: "utf8"});
 } catch(error) {
-    setFailed(error.message);
+    core.setFailed(error.message);
 }
