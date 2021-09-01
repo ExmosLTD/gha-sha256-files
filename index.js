@@ -6,6 +6,7 @@ const files = core.getInput("files");
 
 const toHashString = (f) => `${path.basename(f).padEnd(30, ' ')} ${hasha(fs.readFileSync(f), {algorithm: "sha256"})}`;
 
+// Recursively get all files in a folder.
 function getAllFilesInFolderRecursively(inputFiles) {
      return inputFiles.flatMap(file => 
          fs.statSync(file).isDirectory()
